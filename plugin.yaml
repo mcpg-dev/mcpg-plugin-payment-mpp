@@ -1,0 +1,12 @@
+schema: mcpg.dev/plugin/v1
+id: dev.mcpg.payment.mpp
+name: Machine Payment Protocol (MPP)
+license: BUSL-1.1
+description: |
+  Implements the Machine Payment Protocol challenge / verify flow
+  as a ToolGate plugin. Issues HTTP 402-style challenges for
+  payment-gated tools and validates submitted proofs.
+class: tool_gate
+runtime: native-cdylib-v1
+protocol_version: "1.0"
+required_capabilities: []

@@ -1,0 +1,46 @@
+[package]
+name = "mcpg-plugin-payment-mpp"
+version = "0.1.0-alpha.15"
+license = "BUSL-1.1"
+edition = "2024"
+description = "Machine Payment Protocol (MPP) payment plugin for MCPG gateway"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+mcpg-plugin-protocol = { git = "https://github.com/mcpg-dev/mcpg-plugin-protocol", tag = "v0.1.0-beta.13", version = "=0.1.0-beta.13" }
+mcpg-plugin-sdk = { git = "https://github.com/mcpg-dev/mcpg-plugin-sdk", tag = "v0.1.0-beta.13", version = "=0.1.0-beta.13" }
+# Dual-path plugin: the cdylib uses SyncToolGate, but the gateway
+# also uses the async ToolGatePlugin trait via the
+# PaymentAwarePlugin: ToolGatePlugin bound. async-trait is needed
+# for the latter.
+anyhow = "1.0"
+async-trait = "0.1"
+base64 = "0.22"
+cel = "0.13.0"
+# Settlement-proof verification: the MPP gate verifies an Ed25519
+# signature from the configured settlement authority over the payment
+# binding. Same crate/version the plugin-host uses for artifact signing.
+ed25519-dalek = "2"
+getrandom = "0.2"
+hex = "0.4"
+hmac-sha256 = "1"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+time = { version = "0.3", features = ["formatting", "parsing", "macros"] }
+metrics = "0.24"
+tracing = "0.1"
+
+[features]
+# Default ON so standalone `cargo build -p <this>` still produces a
+# working cdylib. Disabled by the gateway's path-dep so multiple
+# plugins linked together don't all export `mcpg_plugin_register`
+# (linker collision).
+default = ["cdylib-export"]
+cdylib-export = []
+# Declared so the SDK's per-kind `build_static` accessor
+# (gated `#[cfg(feature = "static-firstparty")]`) does not trigger
+# `unexpected_cfgs` in consumer compilation. Empty: this plugin is
+# consumed as a cdylib, not via the static-firstparty fast path.
+static-firstparty = []
