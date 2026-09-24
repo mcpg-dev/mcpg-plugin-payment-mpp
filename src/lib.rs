@@ -992,7 +992,7 @@ fn random_nonce() -> String {
     // getrandom only fails if the OS RNG is unavailable; fall back to a
     // time-derived value so challenge issuance never panics (the nonce's
     // security role is uniqueness + single-use, which time preserves).
-    if getrandom::getrandom(&mut buf).is_err() {
+    if getrandom::fill(&mut buf).is_err() {
         let nanos = time::OffsetDateTime::now_utc().unix_timestamp_nanos();
         buf[..16].copy_from_slice(&nanos.to_le_bytes());
     }

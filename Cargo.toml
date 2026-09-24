@@ -1,6 +1,6 @@
 [package]
 name = "mcpg-plugin-payment-mpp"
-version = "0.1.0-alpha.31"
+version = "0.1.0-alpha.37"
 license = "BUSL-1.1"
 edition = "2024"
 description = "Machine Payment Protocol (MPP) payment plugin for MCPG gateway"
@@ -9,21 +9,21 @@ description = "Machine Payment Protocol (MPP) payment plugin for MCPG gateway"
 crate-type = ["cdylib", "rlib"]
 
 [dependencies]
-mcpg-plugin-protocol = { git = "https://github.com/mcpg-dev/mcpg-plugin-protocol", tag = "v0.1.0-beta.29", version = "=0.1.0-beta.29" }
-mcpg-plugin-sdk = { git = "https://github.com/mcpg-dev/mcpg-plugin-sdk", tag = "v0.1.0-beta.30", version = "=0.1.0-beta.30" }
+mcpg-plugin-protocol = { git = "https://github.com/mcpg-dev/mcpg-plugin-protocol", tag = "v0.1.0-beta.35", version = "=0.1.0-beta.35" }
+mcpg-plugin-sdk = { git = "https://github.com/mcpg-dev/mcpg-plugin-sdk", tag = "v0.1.0-beta.36", version = "=0.1.0-beta.36" }
 # Dual-path plugin: the cdylib uses SyncToolGate, but the gateway
 # also uses the async ToolGatePlugin trait via the
 # PaymentAwarePlugin: ToolGatePlugin bound. async-trait is needed
 # for the latter.
 anyhow = "1.0"
 async-trait = "0.1"
-base64 = "0.22"
-cel = "0.13.0"
+base64 = "0.23"
+cel = "0.14.5"
 # Settlement-proof verification: the MPP gate verifies an Ed25519
 # signature from the configured settlement authority over the payment
 # binding. Same crate/version the plugin-host uses for artifact signing.
-ed25519-dalek = "2"
-getrandom = "0.2"
+ed25519-dalek = "3"
+getrandom = "0.4"
 hex = "0.4"
 hmac-sha256 = "1"
 serde = { version = "1.0", features = ["derive"] }
