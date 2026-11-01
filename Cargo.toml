@@ -1,6 +1,6 @@
 [package]
 name = "mcpg-plugin-payment-mpp"
-version = "0.1.0-alpha.52"
+version = "0.1.0-alpha.53"
 license = "BUSL-1.1"
 edition = "2024"
 description = "Machine Payment Protocol (MPP) payment plugin for MCPG gateway"
@@ -9,8 +9,8 @@ description = "Machine Payment Protocol (MPP) payment plugin for MCPG gateway"
 crate-type = ["cdylib", "rlib"]
 
 [dependencies]
-mcpg-plugin-protocol = { git = "https://github.com/mcpg-dev/mcpg-plugin-protocol", tag = "v0.1.0-beta.49", version = "=0.1.0-beta.49" }
-mcpg-plugin-sdk = { git = "https://github.com/mcpg-dev/mcpg-plugin-sdk", tag = "v0.1.0-beta.51", version = "=0.1.0-beta.51" }
+mcpg-plugin-protocol = { git = "https://github.com/mcpg-dev/mcpg-plugin-protocol", tag = "v0.1.0-beta.50", version = "=0.1.0-beta.50" }
+mcpg-plugin-sdk = { git = "https://github.com/mcpg-dev/mcpg-plugin-sdk", tag = "v0.1.0-beta.52", version = "=0.1.0-beta.52" }
 # Dual-path plugin: the cdylib uses SyncToolGate, but the gateway
 # also uses the async ToolGatePlugin trait via the
 # PaymentAwarePlugin: ToolGatePlugin bound. async-trait is needed
