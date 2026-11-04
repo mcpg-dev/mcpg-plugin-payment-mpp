@@ -1,6 +1,6 @@
 [package]
 name = "mcpg-plugin-payment-mpp"
-version = "0.1.0-rc.5"
+version = "0.1.0"
 license = "BUSL-1.1"
 edition = "2024"
 description = "Machine Payment Protocol (MPP) payment plugin for MCPG gateway"
