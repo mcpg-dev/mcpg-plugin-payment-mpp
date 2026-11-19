@@ -775,9 +775,8 @@ enum InternalEvaluation {
 
 /// JSON-RPC error code for payment required (402).
 ///
-/// MCP 2025-11-25 reserves `-32042` for `URLElicitationRequiredError`,
-/// so MCPG-specific payment codes live above the reserved `-32000..-32099`
-/// JSON-RPC + MCP range. See also `apps/gateway/src/protocol/mod.rs`.
+/// MCPG-specific payment codes live outside the `-32000..-32099` band
+/// that JSON-RPC and MCP reserve for their own errors.
 const PAYMENT_REQUIRED_CODE: i32 = -33042;
 /// JSON-RPC error code for payment verification failure.
 const PAYMENT_VERIFICATION_FAILED_CODE: i32 = -33043;
@@ -1625,8 +1624,7 @@ mod tests {
         assert_eq!(tools, vec!["premium_tool", "premium_tool2"]);
     }
 
-    /// Regression guard: MCP 2025-11-25 reserves -32042 for
-    /// URLElicitationRequiredError. Ensure MPP no longer collides.
+    /// The payment codes stay outside the band JSON-RPC and MCP reserve.
     #[test]
     fn payment_codes_outside_mcp_reserved_range() {
         const MCP_RESERVED_LO: i32 = -32099;
